@@ -1,0 +1,39 @@
+.landing {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  background-color: #d31d24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loaderContainer {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #191919;
+    z-index: 10;
+
+    .loadingWord {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+    .loaderTitle {
+      font-size: 1.5rem;
+      font-family: serif;
+    }
+  }
+
+  .firstImageContainer {
+    position: relative;
+    overflow: hidden;
+    background: #191919;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    img {
+      object-fit: cover !important;
+    }
+  }
+}
