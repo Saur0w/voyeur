@@ -3,10 +3,11 @@
   width: 100vw;
   position: relative;
   overflow: hidden;
-  background-color: #d31d24;
+  background-color: #E62D31;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
   .loaderContainer {
     position: absolute;
     bottom: 10%;
@@ -16,24 +17,62 @@
     color: #191919;
     z-index: 10;
 
+    .textMask {
+      overflow: hidden;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
     .loadingWord {
       font-size: 0.75rem;
       letter-spacing: 2px;
-      margin-bottom: 0.5rem;
+      margin: 0;
+      span {
+        font-variant-numeric: tabular-nums;
+      }
     }
     .loaderTitle {
       font-size: 1.5rem;
       font-family: serif;
+      align-items: center;
     }
   }
 
   .firstImageContainer {
     position: relative;
     overflow: hidden;
-    background: #191919;
+    background: #ec2e33;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    img {
+    will-change: transform, width, height;
+    .mainImage {
       object-fit: cover !important;
+      opacity: 0;
+    }
+    .progressBar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #191919;
+      z-index: 2;
+    }
+  }
+
+  .titleWrapper {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    width: 90%;
+    overflow: hidden;
+    z-index: 5;
+    padding-bottom: 1.5vw;
+    margin-bottom: -1.5vw;
+    h1 {
+      font-size: 10vw;
+      font-weight: 900;
+      line-height: 0.9;
+      color: #E72025;
+      margin: 0;
     }
   }
 }

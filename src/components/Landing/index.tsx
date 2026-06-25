@@ -8,10 +8,15 @@ import Image from "next/image";
 
 gsap.registerPlugin(useGSAP);
 
+const titleText = "I'M VENGEANCE"
+
 export default function Landing() {
     const landingRef = useRef<HTMLDivElement>(null);
     const loaderTextRef = useRef<HTMLDivElement>(null);
     const firstImageContainerRef = useRef<HTMLDivElement>(null);
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
+    const counterRef = useRef<HTMLSpanElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -24,27 +29,89 @@ export default function Landing() {
             width: "120px",
             height: "6px",
             transformOrigin: "center center",
-            rotation: -4
+            rotation: -6
         });
-        tl.to(loaderTextRef.current, {
+        gsap.set(progressRef.current, {
+            scaleX: 0,
+            transformOrigin: "left center"
+        })
+
+        gsap.set(`.${styles.mainImage}`, {
+            opacity: 0
+        });
+        gsap.set(titleRef.current, {
+            y: "110%"
+        });
+
+        gsap.set([`.${styles.loadingWord}`, `.${styles.loaderTitle}`], {
+            y: "100%"
+        });
+
+        tl.to([`.${styles.loadingWord}`, `.${styles.loaderTitle}`], {
+            y: "0%",
+            duration: 1,
+            stagger: 0.1,
+            ease: "power4.out"
+        })
+        const counterObj = { value: 0 };
+
+        tl.to(progressRef.current, {
+            scaleX: 1,
+            duration: 1.4,
+            ease: "power2.inOut"
+        }, "-=0.4")
+
+            .to(counterObj, {
+                value: 100,
+                duration: 1.6,
+                ease: "power2.inOut",
+                onUpdate: () => {
+                    if (counterRef.current) {
+                        counterRef.current.innerText = String(Math.floor(counterObj.value)).padStart(3, '0');
+                    }
+                }
+            }, "<")
+
+        .to(loaderTextRef.current, {
             opacity: 0,
             duration: 0.6,
-            delay: 1.5
         })
+            .to(`.${styles.mainImage}`, {
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "-=0.02")
             .to(firstImageContainerRef.current, {
                 rotation: 0,
                 width: "100vw",
                 height: "100vh",
                 duration: 1.4,
-            }, "-=0.2")
+            }, "-=0.1")
+
+            .to(progressRef.current, {
+                opacity: 0,
+                duration: 0.8,
+                ease: "power2.out"
+            }, "-=0.8")
+            .to(titleRef.current, {
+                y: "0%",
+                duration: 1,
+                ease: "power3.out"
+            }, "-=.4")
 
     }, { scope: landingRef });
 
     return (
         <section className={styles.landing} ref={landingRef}>
             <div ref={loaderTextRef} className={styles.loaderContainer}>
-                <p className={styles.loadingWord}>LOADING...011</p>
-                <h2 className={styles.loaderTitle}>Truth: I&#39;m the Shadows</h2>
+                <div className={styles.textMask}>
+                    <p className={styles.loadingWord}>
+                        LOADING...<span ref={counterRef}>000</span>
+                    </p>
+                </div>
+                <div className={styles.textMask}>
+                    <h2 className={styles.loaderTitle}>Truth:<br /> I&#39;m the Shadows</h2>
+                </div>
             </div>
             <div className={styles.firstImageContainer} ref={firstImageContainerRef}>
                 <Image
@@ -54,7 +121,14 @@ export default function Landing() {
                     priority
                     quality={100}
                     unoptimized
+                    className={styles.mainImage}
                     />
+                <div ref={progressRef} className={styles.progressBar} />
+            </div>
+            <div className={styles.titleWrapper}>
+                <h1 ref={titleRef}>
+                    {titleText}
+                </h1>
             </div>
         </section>
     );
