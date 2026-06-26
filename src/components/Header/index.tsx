@@ -13,7 +13,6 @@ export default function Header() {
     const logoRef = useRef<HTMLAnchorElement>(null);
 
     useGSAP(() => {
-        // Set up the entrance timeline
         const tl = gsap.timeline({
             defaults: {
                 ease: "power4.out",
@@ -21,33 +20,29 @@ export default function Header() {
             }
         });
 
-        // 1. Position elements out of view inside their mask containers
         gsap.set([logoRef.current, `.${styles.navLink}`], {
             y: "100%"
         });
 
-        // 2. Elegantly slide them up after the central loader has expanded
         tl.to(logoRef.current, {
             y: "0%",
-            delay: 2.2 // Syncs up beautifully right as the hero expansion stabilizes
+            delay: 1.4
         })
             .to(`.${styles.navLink}`, {
                 y: "0%",
-                stagger: 0.08 // Staggers the links slightly from left to right
-            }, "-=1.0"); // Overlaps with the logo reveal for fluidity
+                stagger: 0.08
+            }, "-=1.0");
 
     }, { scope: headerRef });
 
     return (
         <header className={styles.header} ref={headerRef}>
-            {/* Logo Mask */}
             <div className={styles.logoWrapper}>
                 <Link href="/" ref={logoRef} className={styles.logo}>
-                    GOTHAM // ARCHIVE
+                    VOYEUR
                 </Link>
             </div>
 
-            {/* Navigation Links Mask Group */}
             <nav className={styles.nav}>
                 <div className={styles.linkWrapper}>
                     <Link href="#journal" className={styles.navLink}>THE JOURNAL</Link>

@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <div className={styles.page}>
         <Header />
-      <Landing />
+        <Landing />
     </div>
   );
 }
