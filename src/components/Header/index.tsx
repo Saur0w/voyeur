@@ -21,12 +21,12 @@ export default function Header() {
         });
 
         gsap.set([logoRef.current, `.${styles.navLink}`], {
-            y: "100%"
+            y: "110%"
         });
 
         tl.to(logoRef.current, {
             y: "0%",
-            delay: 1.4
+            delay: 3.3
         })
             .to(`.${styles.navLink}`, {
                 y: "0%",
