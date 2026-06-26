@@ -74,25 +74,25 @@ export default function Landing() {
 
         .to(loaderTextRef.current, {
             opacity: 0,
-            duration: 0.6,
+            duration: 0.41,
         })
             .to(`.${styles.mainImage}`, {
                 opacity: 1,
                 duration: 0.6,
                 ease: "power2.out"
-            }, "-=0.02")
+            }, "-=0.8")
             .to(firstImageContainerRef.current, {
                 rotation: 0,
                 width: "100vw",
                 height: "100vh",
-                duration: 1.4,
-            }, "-=0.1")
+                duration: 1.8,
+            }, "-=0.8")
 
             .to(progressRef.current, {
                 opacity: 0,
                 duration: 0.8,
                 ease: "power2.out"
-            }, "-=0.8")
+            }, "-=1.5")
             .to(titleRef.current, {
                 y: "0%",
                 duration: 1,
