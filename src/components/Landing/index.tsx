@@ -12,11 +12,15 @@ const titleText = "I'M VENGEANCE"
 
 export default function Landing() {
     const landingRef = useRef<HTMLDivElement>(null);
+    const loaderRef = useRef<HTMLDivElement>(null);
     const loaderTextRef = useRef<HTMLDivElement>(null);
     const firstImageContainerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
     const counterRef = useRef<HTMLSpanElement>(null);
+    const desRef = useRef<HTMLDivElement>(null);
+    const leftDesRef = useRef<HTMLDivElement>(null);
+    const rightDesRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -72,10 +76,10 @@ export default function Landing() {
                 }
             }, "<")
 
-        .to(loaderTextRef.current, {
-            opacity: 0,
-            duration: 0.41,
-        })
+            .to(loaderTextRef.current, {
+                opacity: 0,
+                duration: 0.41,
+            })
 
             .to(firstImageContainerRef.current, {
                 rotation: 0,
@@ -100,37 +104,58 @@ export default function Landing() {
                 duration: 1,
                 ease: "power3.out"
             }, "-=.4")
+            .to(desRef.current, {
+                opacity: 1
+            })
+            .to([leftDesRef.current, rightDesRef.current], {
+                clipPath: "inset(0% 0% 0% 0%)", 
+                duration: 1.2,
+                ease: "power4.inOut"
+            })
+            .to(loaderRef.current, {
+                background: "#000"
+            })
 
     }, { scope: landingRef });
 
     return (
         <section className={styles.landing} ref={landingRef}>
-            <div ref={loaderTextRef} className={styles.loaderContainer}>
-                <div className={styles.textMask}>
-                    <p className={styles.loadingWord}>
-                        LOADING...<span ref={counterRef}>000</span>
-                    </p>
+            <div className={styles.loader} ref={loaderRef}>
+                <div ref={loaderTextRef} className={styles.loaderContainer}>
+                    <div className={styles.textMask}>
+                        <p className={styles.loadingWord}>
+                            LOADING...<span ref={counterRef}>000</span>
+                        </p>
+                    </div>
+                    <div className={styles.textMask}>
+                        <h2 className={styles.loaderTitle}>Truth:<br /> I&#39;m the Shadows</h2>
+                    </div>
                 </div>
-                <div className={styles.textMask}>
-                    <h2 className={styles.loaderTitle}>Truth:<br /> I&#39;m the Shadows</h2>
-                </div>
-            </div>
-            <div className={styles.firstImageContainer} ref={firstImageContainerRef}>
-                <Image
-                    src="/images/batman.jpg"
-                    alt="Landing"
-                    fill
-                    priority
-                    quality={100}
-                    unoptimized
-                    className={styles.mainImage}
+                <div className={styles.firstImageContainer} ref={firstImageContainerRef}>
+                    <Image
+                        src="/images/batman.jpg"
+                        alt="Landing"
+                        fill
+                        priority
+                        quality={100}
+                        unoptimized
+                        className={styles.mainImage}
                     />
-                <div ref={progressRef} className={styles.progressBar} />
+                    <div ref={progressRef} className={styles.progressBar} />
+                </div>
+                <div className={styles.titleWrapper}>
+                    <h1 ref={titleRef}>
+                        {titleText}
+                    </h1>
+                </div>
             </div>
-            <div className={styles.titleWrapper}>
-                <h1 ref={titleRef}>
-                    {titleText}
-                </h1>
+            <div className={styles.des} ref={desRef}>
+                <div className={styles.leftDes} ref={leftDesRef}>
+                    <h1>The Shadows</h1>
+                </div>
+                <div className={styles.rightDes} ref={rightDesRef}>
+                    <h1>Batman</h1>
+                </div>
             </div>
         </section>
     );

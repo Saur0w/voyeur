@@ -76,4 +76,41 @@
       margin: 0;
     }
   }
+  .des {
+  opacity: 0;
+  font-family: var(--font-playfair), serif;
+  font-size: 3.5rem;
+  
+  color: #D71C30;
+  
+  .leftDes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 48vw;                 
+    clip-path: inset(0 100% 0 0); 
+    z-index: 50;
+    font-weight: 200;
+  }
+  
+  .rightDes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 48vw;                 
+    clip-path: inset(0 0 0 100%); 
+    z-index: 50;
+    font-weight: 200;
+  }
+}
 }
