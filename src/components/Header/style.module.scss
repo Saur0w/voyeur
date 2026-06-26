@@ -11,6 +11,7 @@
   z-index: 100;
   background: transparent;
   text-transform: uppercase;
+  font-family: var(--font-playfair), serif;
 
   .logoWrapper, .linkWrapper {
     overflow: hidden;
@@ -33,10 +34,11 @@
     gap: 3rem;
 
     .navLink {
+      font-family: var(--font-playfair), serif;
       font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 2px;
-      color: #f8a8a8;
+      color: #E62D31;
       text-decoration: none;
       display: inline-block;
       transition: color 0.3s ease;

@@ -21,6 +21,7 @@ export default function Landing() {
     const desRef = useRef<HTMLDivElement>(null);
     const leftDesRef = useRef<HTMLDivElement>(null);
     const rightDesRef = useRef<HTMLDivElement>(null);
+    const capsuleRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -107,9 +108,37 @@ export default function Landing() {
             .to(desRef.current, {
                 opacity: 1
             })
+            .to(leftDesRef.current, {
+                clipPath: "inset(0% 4% 0% 0%)", 
+                duration: 1.2,
+                ease: "power4.inOut"
+            })
+            .to(rightDesRef.current, {
+                clipPath: "inset(0% 0% 0% 4%)", 
+                duration: 1.2,
+                ease: "power4.inOut"
+            }, "<")
             .to([leftDesRef.current, rightDesRef.current], {
                 clipPath: "inset(0% 0% 0% 0%)", 
                 duration: 1.2,
+                ease: "power4.inOut"
+            })
+            .to(capsuleRef.current, {
+                opacity: 1
+            }, "-=1.4")
+            .to(capsuleRef.current, {
+                rotation: 80,
+                duration: 1.4,
+                ease: "power4.inOut"
+            })
+            .to(capsuleRef.current, {
+                backgroundColor: "#D71C30",
+                duration: 1.5,
+                ease: "power4.inOut"
+            }, "-=1")
+            .to(capsuleRef.current, {
+                height: "0vh",
+                duration: 1.5,
                 ease: "power4.inOut"
             })
             .to(titleRef.current, {
@@ -132,6 +161,7 @@ export default function Landing() {
                 duration: 2,
                 ease: "power4.inOut"
             })
+
 
     }, { scope: landingRef });
 
@@ -170,6 +200,7 @@ export default function Landing() {
                 <div className={styles.leftDes} ref={leftDesRef}>
                     <h1>The Shadows</h1>
                 </div>
+                <div className={styles.capsule} ref={capsuleRef} />
                 <div className={styles.rightDes} ref={rightDesRef}>
                     <h1>Batman</h1>
                 </div>
