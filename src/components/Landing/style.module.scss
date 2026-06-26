@@ -3,20 +3,29 @@
   width: 100vw;
   position: relative;
   overflow: hidden;
-  background-color: #E62D31;
+  background-color: #D71C30;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
   font-family: var(--font-inter), sans-serif;
-  .loaderContainer {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    color: #191919;
-    z-index: 10;
+  .loader {
+    position: relative;
+    background-color: #D71C30;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .loaderContainer {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #191919;
+      z-index: 10;
 
     .textMask {
       overflow: hidden;
@@ -44,6 +53,7 @@
     background: #f13b3f;
     box-shadow: 0 0 20px rgba(0,0,0,0.2);
     will-change: transform, width, height;
+    
     .mainImage {
       object-fit: cover !important;
       opacity: 0;
@@ -75,6 +85,7 @@
       color: #E72025;
       margin: 0;
     }
+  }
   }
   .des {
   opacity: 0;

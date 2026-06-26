@@ -112,8 +112,25 @@ export default function Landing() {
                 duration: 1.2,
                 ease: "power4.inOut"
             })
+            .to(titleRef.current, {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            })
+            .to(`.${styles.mainImage}`, {
+                opacity: 0,
+                duration: 0.6,
+                ease: "power2.out"
+            }, "<") 
+            .to(firstImageContainerRef.current, {
+                backgroundColor: "#191919",
+                duration: 0.8,
+                ease: "power2.inOut"
+            }, "-=2") 
             .to(loaderRef.current, {
-                background: "#000"
+                rotation: 30,
+                duration: 2,
+                ease: "power4.inOut"
             })
 
     }, { scope: landingRef });
