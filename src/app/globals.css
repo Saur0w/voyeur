@@ -14,3 +14,12 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+::selection {
+  background-color: #E62D31;
+  color: #ffffff;
+}
+
+::-moz-selection {
+  background-color: #E62D31;
+  color: #ffffff;
+}

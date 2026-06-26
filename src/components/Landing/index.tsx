@@ -76,21 +76,23 @@ export default function Landing() {
             opacity: 0,
             duration: 0.41,
         })
-            .to(`.${styles.mainImage}`, {
-                opacity: 1,
-                duration: 0.6,
-                ease: "power2.out"
-            }, "-=0.8")
+
             .to(firstImageContainerRef.current, {
                 rotation: 0,
                 width: "100vw",
                 height: "100vh",
-                duration: 1.8,
-            }, "-=0.8")
+                duration: 1.2,
+                ease: "power4.inOut"
+            }, "-=0.2")
 
             .to(progressRef.current, {
                 opacity: 0,
                 duration: 0.8,
+                ease: "power2.out"
+            }, "-=1.5")
+            .to(`.${styles.mainImage}`, {
+                opacity: 1,
+                duration: 0.6,
                 ease: "power2.out"
             }, "-=1.5")
             .to(titleRef.current, {
