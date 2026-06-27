@@ -5,14 +5,15 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import Image from "next/image";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-const titleText = "I'M VENGEANCE"
+const titleText = "FIERCE KINDNESS";
 const desText = (
-  <>
-    The&nbsp;&nbsp;Gentle&nbsp;&nbsp;Symbol <br /> of&nbsp;&nbsp;Hope
-  </>
+    <>
+        The&nbsp;&nbsp;Gentle&nbsp;&nbsp;Symbol <br /> of&nbsp;&nbsp;Hope
+    </>
 );
 
 export default function Landing() {
@@ -47,19 +48,16 @@ export default function Landing() {
         gsap.set(progressRef.current, {
             scaleX: 0,
             transformOrigin: "left center"
-        })
-
+        });
         gsap.set(`.${styles.mainImage}`, {
             opacity: 0
         });
         gsap.set(titleRef.current, {
             y: "110%"
         });
-
         gsap.set([`.${styles.loadingWord}`, `.${styles.loaderTitle}`], {
             y: "100%"
         });
-
         gsap.set(desTextRef.current, {
             y: "110%" 
         });
@@ -69,7 +67,8 @@ export default function Landing() {
             duration: 1,
             stagger: 0.1,
             ease: "power4.out"
-        })
+        });
+
         const counterObj = { value: 0 };
 
         tl.to(progressRef.current, {
@@ -77,131 +76,127 @@ export default function Landing() {
             duration: 1.4,
             ease: "power2.inOut"
         }, "-=0.4")
-
-            .to(counterObj, {
-                value: 100,
-                duration: 1.6,
-                ease: "power2.inOut",
-                onUpdate: () => {
-                    if (counterRef.current) {
-                        counterRef.current.innerText = String(Math.floor(counterObj.value)).padStart(3, '0');
-                    }
+        .to(counterObj, {
+            value: 100,
+            duration: 1.6,
+            ease: "power2.inOut",
+            onUpdate: () => {
+                if (counterRef.current) {
+                    counterRef.current.innerText = String(Math.floor(counterObj.value)).padStart(3, '0');
                 }
-            }, "<")
+            }
+        }, "<")
+        .to(loaderTextRef.current, {
+            opacity: 0,
+            duration: 0.41,
+        })
+        .to(firstImageContainerRef.current, {
+            rotation: 0,
+            width: "100vw",
+            height: "100vh",
+            duration: 1.2,
+            ease: "power4.inOut"
+        }, "-=0.2")
+        .to(progressRef.current, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        }, "-=1.5")
+        .to(`.${styles.mainImage}`, {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "-=1.5")
+        .to(titleRef.current, {
+            y: "0%",
+            duration: 1,
+            ease: "power3.out"
+        }, "-=.4")
+        
+        
+        
+        .to(desRef.current, {
+            opacity: 1,
+            duration: 0.8
+        }, "-=0.5")
+        
 
-            .to(loaderTextRef.current, {
-                opacity: 0,
-                duration: 0.41,
-            })
+        
+        const scrollTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: landingRef.current,
+                start: "top top",
+                end: "+=4500", 
+                scrub: 1,      
+                pin: true,     
+                invalidateOnRefresh: true,
+            }
+        });
 
-            .to(firstImageContainerRef.current, {
-                rotation: 0,
-                width: "100vw",
-                height: "100vh",
-                duration: 1.2,
-                ease: "power4.inOut"
-            }, "-=0.2")
+        scrollTl.to(leftDesRef.current, { 
+            clipPath: "inset(0% 0% 0% 0%)", 
+            ease: "none", 
+            duration: 2 
+        })
+        .to(rightDesRef.current, { 
+            clipPath: "inset(0% 0% 0% 0%)", 
+            ease: "none", 
+            duration: 2 
+        }, "<") 
+        .to(loaderRef.current, { 
+            opacity: 0, 
+            ease: "none", 
+            duration: 2 
+        }, "<")
 
-            .to(progressRef.current, {
-                opacity: 0,
-                duration: 0.8,
-                ease: "power2.out"
-            }, "-=1.5")
-            .to(`.${styles.mainImage}`, {
-                opacity: 1,
-                duration: 0.6,
-                ease: "power2.out"
-            }, "-=1.5")
-            .to(titleRef.current, {
-                y: "0%",
-                duration: 1,
-                ease: "power3.out"
-            }, "-=.4")
-            .to(desRef.current, {
-                opacity: 1
-            })
-            .to(leftDesRef.current, {
-                clipPath: "inset(0% 4% 0% 0%)", 
-                duration: 1.2,
-                ease: "power4.inOut"
-            })
-            .to(rightDesRef.current, {
-                clipPath: "inset(0% 0% 0% 4%)", 
-                duration: 1.2,
-                ease: "power4.inOut"
-            }, "<")
-            .to([leftDesRef.current, rightDesRef.current], {
-                clipPath: "inset(0% 0% 0% 0%)", 
-                duration: 1.2,
-                ease: "power4.inOut"
-            })
-            .to(capsuleRef.current, {
-                opacity: 1
-            }, "-=1.4")
-            .to(capsuleRef.current, {
-                rotation: 80,
-                height: "90vh",
-                duration: 0.8,
-                ease: "power4.inOut"
-            })
-            .to(capsuleRef.current, {
-                backgroundColor: "#D71C30",
-                duration: 1.5,
-                ease: "power4.inOut"
-            }, "-=1")
-            .to(capsuleRef.current, {
-                height: "0vh",
-                duration: 1.5,
-                ease: "power4.inOut"
-            })
-            .to(`.${styles.leftDes} .${styles.textContainer}`, {
-                left: "50%",
-                duration: 1.5,
-                ease: "power4.inOut"
-            }, "<")
-            .to(`.${styles.rightDes} .${styles.textContainer}`, {
-                right: "50%",
-                duration: 1.5,
-                ease: "power4.inOut"
-            }, "<") 
-            .to(leftImageContainer.current, {
-                clipPath: "inset(0% 0% 0% 0%)",
-                duration: 1.5,
-                ease: "power4.inOut"
-            })
-            .to(rightImageContainer.current, {
-                clipPath: "inset(0% 0% 0% 0%)",
-                duration: 1.5,
-                ease: "power4.inOut"
-            }, "<")
+        .to(capsuleRef.current, { 
+            opacity: 1, 
+            duration: 0.1, 
+            ease: "none" 
+        }, 1.9)
 
-            .to(desTextRef.current, {
-                y: "0%",
-                duration: 1.4,
-                ease: "power4.out"
-            }, "-=0.5")
-            
-            .to(titleRef.current, {
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out"
-            })
-            .to(`.${styles.mainImage}`, {
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.out"
-            }, "<") 
-            .to(firstImageContainerRef.current, {
-                backgroundColor: "#191919",
-                duration: 0.8,
-                ease: "power2.inOut"
-            }, "-=2") 
-            .to(loaderRef.current, {
-                rotation: 30,
-                duration: 2,
-                ease: "power4.inOut"
-            })
 
+        .to(capsuleRef.current, { 
+            rotation: 80, 
+            height: "85vh",
+            duration: 3, 
+            ease: "power2.out" 
+        }, "+=0.2")
+
+
+        .to(capsuleRef.current, { 
+            backgroundColor: "#D71C30", 
+            height: "0vh", 
+            duration: 2, 
+            ease: "power2.inOut" 
+        }, "+=0.2")
+        .to(`.${styles.leftDes} .${styles.textContainer}`, { 
+            left: "50%", 
+            duration: 2, 
+            ease: "power2.inOut" 
+        }, "<") 
+        .to(`.${styles.rightDes} .${styles.textContainer}`, { 
+            right: "50%", 
+            duration: 2, 
+            ease: "power2.inOut" 
+        }, "<") 
+
+        .to(leftImageContainer.current, { 
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 3,
+            ease: "power2.out"
+        }, "+=0.1")
+        .to(rightImageContainer.current, { 
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 3,
+            ease: "power2.out"
+        }, "<")
+
+        .to(desTextRef.current, { 
+            y: "0%",
+            duration:1.5,
+            ease: "power2.out"
+        }, "-=0.8")
 
     }, { scope: landingRef });
 
@@ -220,7 +215,7 @@ export default function Landing() {
                 </div>
                 <div className={styles.firstImageContainer} ref={firstImageContainerRef}>
                     <Image
-                        src="/images/batman.jpg"
+                        src="/images/main.jpg"
                         alt="Landing"
                         fill
                         priority
@@ -236,6 +231,7 @@ export default function Landing() {
                     </h1>
                 </div>
             </div>
+
             <div className={styles.des} ref={desRef}>
                 <div className={styles.desTextContainer}>
                     <h1 ref={desTextRef}>{desText}</h1>
@@ -260,7 +256,6 @@ export default function Landing() {
                     </div>
                 </div>
 
-
                 <div className={styles.capsule} ref={capsuleRef} />
 
                 <div className={styles.rightDes} ref={rightDesRef}>
@@ -276,16 +271,16 @@ export default function Landing() {
                     </div>
                     <div className={styles.textContainer}>
                         <div className={styles.splitSub}>
-                        <span>Creative</span>
-                        <span>Studio</span>
+                            <span>Creative</span>
+                            <span>Studio</span>
+                        </div>
+                        <h1 className={styles.heading}>Étoile</h1>
+                        <p className={styles.paragraph}>
+                            Symbolizes hope, guidance, ambition, and the light that shines even in the darkest moments.
+                        </p>
                     </div>
-                    <h1 className={styles.heading}>Étoile</h1>
-                    <p className={styles.paragraph}>
-                        Symbolizes hope, guidance, ambition, and the light that shines even in the darkest moments.
-                    </p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     );
 }
