@@ -197,14 +197,36 @@ export default function Landing() {
                 </div>
             </div>
             <div className={styles.des} ref={desRef}>
-                <div className={styles.leftDes} ref={leftDesRef}>
-                    <h1>The Shadows</h1>
-                </div>
-                <div className={styles.capsule} ref={capsuleRef} />
-                <div className={styles.rightDes} ref={rightDesRef}>
-                    <h1>Batman</h1>
-                </div>
+    <div className={styles.leftDes} ref={leftDesRef}>
+        <div className={styles.textContainer}>
+            <span className={styles.subHeading}>IDENTITY:</span>
+            <h1 className={styles.heading}>The Shadows</h1>
+            <p className={styles.paragraph}>
+                TO EVOKE A SENSE OF DREAD AND UNCERTAINTY, 
+                LURKING WITHIN THE UNDERBELLY OF GOTHAM TO 
+                CLEANSE THE STREETS FROM THE INSIDE OUT.
+            </p>
+        </div>
+    </div>
+
+
+    <div className={styles.capsule} ref={capsuleRef} />
+
+    <div className={styles.rightDes} ref={rightDesRef}>
+        <div className={styles.textContainer}>
+            <div className={styles.splitSub}>
+                <span>VIGILANTE:</span>
+                <span>01</span>
             </div>
+            <h1 className={styles.heading}>Batman</h1>
+            <p className={styles.paragraph}>
+                TO PROVIDE AN UNFILTERED AND ABSOLUTE FORCE 
+                OF JUSTICE, ALIGNING VENGEANCE WITH DISCIPLINE 
+                TO PROTECT THOSE WHO CANNOT PROTECT THEMSELVES.
+            </p>
+        </div>
+    </div>
+</div>
         </section>
     );
 }
