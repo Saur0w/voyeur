@@ -9,6 +9,11 @@ import Image from "next/image";
 gsap.registerPlugin(useGSAP);
 
 const titleText = "I'M VENGEANCE"
+const desText = (
+  <>
+    The&nbsp;&nbsp;Gentle&nbsp;&nbsp;Symbol <br /> of&nbsp;&nbsp;Hope
+  </>
+);
 
 export default function Landing() {
     const landingRef = useRef<HTMLDivElement>(null);
@@ -22,6 +27,9 @@ export default function Landing() {
     const leftDesRef = useRef<HTMLDivElement>(null);
     const rightDesRef = useRef<HTMLDivElement>(null);
     const capsuleRef = useRef<HTMLDivElement>(null);
+    const leftImageContainer = useRef<HTMLDivElement>(null);
+    const rightImageContainer = useRef<HTMLDivElement>(null);
+    const desTextRef = useRef<HTMLHeadingElement>(null);
 
     useGSAP(() => {
         const tl = gsap.timeline({
@@ -50,6 +58,10 @@ export default function Landing() {
 
         gsap.set([`.${styles.loadingWord}`, `.${styles.loaderTitle}`], {
             y: "100%"
+        });
+
+        gsap.set(desTextRef.current, {
+            y: "110%" 
         });
 
         tl.to([`.${styles.loadingWord}`, `.${styles.loaderTitle}`], {
@@ -128,7 +140,8 @@ export default function Landing() {
             }, "-=1.4")
             .to(capsuleRef.current, {
                 rotation: 80,
-                duration: 1.4,
+                height: "90vh",
+                duration: 0.8,
                 ease: "power4.inOut"
             })
             .to(capsuleRef.current, {
@@ -141,6 +154,33 @@ export default function Landing() {
                 duration: 1.5,
                 ease: "power4.inOut"
             })
+            .to(`.${styles.leftDes} .${styles.textContainer}`, {
+                left: "50%",
+                duration: 1.5,
+                ease: "power4.inOut"
+            }, "<")
+            .to(`.${styles.rightDes} .${styles.textContainer}`, {
+                right: "50%",
+                duration: 1.5,
+                ease: "power4.inOut"
+            }, "<") 
+            .to(leftImageContainer.current, {
+                clipPath: "inset(0% 0% 0% 0%)",
+                duration: 1.5,
+                ease: "power4.inOut"
+            })
+            .to(rightImageContainer.current, {
+                clipPath: "inset(0% 0% 0% 0%)",
+                duration: 1.5,
+                ease: "power4.inOut"
+            }, "<")
+
+            .to(desTextRef.current, {
+                y: "0%",
+                duration: 1.4,
+                ease: "power4.out"
+            }, "-=0.5")
+            
             .to(titleRef.current, {
                 opacity: 0,
                 duration: 0.6,
@@ -197,36 +237,55 @@ export default function Landing() {
                 </div>
             </div>
             <div className={styles.des} ref={desRef}>
-    <div className={styles.leftDes} ref={leftDesRef}>
-        <div className={styles.textContainer}>
-            <span className={styles.subHeading}>IDENTITY:</span>
-            <h1 className={styles.heading}>The Shadows</h1>
-            <p className={styles.paragraph}>
-                TO EVOKE A SENSE OF DREAD AND UNCERTAINTY, 
-                LURKING WITHIN THE UNDERBELLY OF GOTHAM TO 
-                CLEANSE THE STREETS FROM THE INSIDE OUT.
-            </p>
-        </div>
-    </div>
+                <div className={styles.desTextContainer}>
+                    <h1 ref={desTextRef}>{desText}</h1>
+                </div>
+                <div className={styles.leftDes} ref={leftDesRef}>
+                    <div className={styles.leftImageContainer} ref={leftImageContainer}>
+                        <Image
+                            src="/images/warmth.jpg"
+                            alt="left des"
+                            fill
+                            priority
+                            quality={100}
+                            unoptimized
+                        />
+                    </div>
+                    <div className={styles.textContainer}>
+                        <span className={styles.subHeading}>Meaning:</span>
+                        <h1 className={styles.heading}>Lueur</h1>
+                        <p className={styles.paragraph}>
+                            Represents a soft, gentle light, often associated with hope, warmth, and quiet optimism.
+                        </p>
+                    </div>
+                </div>
 
 
-    <div className={styles.capsule} ref={capsuleRef} />
+                <div className={styles.capsule} ref={capsuleRef} />
 
-    <div className={styles.rightDes} ref={rightDesRef}>
-        <div className={styles.textContainer}>
-            <div className={styles.splitSub}>
-                <span>VIGILANTE:</span>
-                <span>01</span>
+                <div className={styles.rightDes} ref={rightDesRef}>
+                    <div className={styles.rightImageContainer} ref={rightImageContainer}>
+                        <Image
+                            src="/images/blue.jpg"
+                            alt="right des"
+                            fill
+                            priority
+                            quality={100}
+                            unoptimized
+                        />
+                    </div>
+                    <div className={styles.textContainer}>
+                        <div className={styles.splitSub}>
+                        <span>Creative</span>
+                        <span>Studio</span>
+                    </div>
+                    <h1 className={styles.heading}>Étoile</h1>
+                    <p className={styles.paragraph}>
+                        Symbolizes hope, guidance, ambition, and the light that shines even in the darkest moments.
+                    </p>
+                </div>
             </div>
-            <h1 className={styles.heading}>Batman</h1>
-            <p className={styles.paragraph}>
-                TO PROVIDE AN UNFILTERED AND ABSOLUTE FORCE 
-                OF JUSTICE, ALIGNING VENGEANCE WITH DISCIPLINE 
-                TO PROTECT THOSE WHO CANNOT PROTECT THEMSELVES.
-            </p>
         </div>
-    </div>
-</div>
-        </section>
+    </section>
     );
 }

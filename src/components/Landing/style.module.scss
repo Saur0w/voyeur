@@ -88,45 +88,91 @@
   }
   }
   .des {
-  position: absolute; 
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  overflow: hidden;
-  font-family: var(--font-playfair), serif;
-  color: #D71C30; 
-
-  .leftDes, .rightDes {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    position: absolute;
+    position: absolute; 
     top: 0;
+    left: 0;
+    width: 100vw;
     height: 100vh;
-    width: 50vw;                 
-    z-index: 50;
-    font-weight: 200;
-  }
+    opacity: 0;
+    overflow: hidden;
+    font-family: var(--font-playfair), serif;
+    color: #D71C30; 
 
-  .leftDes {
-    left: 0;                 
-    clip-path: inset(0 100% 0 0); 
-
-    .textContainer {
+    .desTextContainer {
       position: absolute;
-      left: 8%; 
+      top: 30%; 
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      text-align: center;
+      width: 90%;
+      pointer-events: none;
+      overflow: hidden; 
+
+      h1 {
+        font-family: var(--font-playfair), serif;
+        font-size: 12rem;
+        line-height: 1.1; 
+        letter-spacing: 1rem;
+        margin: 0;
+        color: #D71C30;
+      }
     }
-  }
 
-  .rightDes {
-    right: 0;                 
-    clip-path: inset(0 0 0 100%); 
-
-    .textContainer {
+    .leftDes, .rightDes {
+      display: flex;
+      align-items: center;
+      background-color: #F3EFEA;
       position: absolute;
-      right: 8%; 
+      top: 0;
+      height: 100vh;
+      width: 50vw;                 
+      z-index: 50;
+      font-weight: 200;
+      
+    }
+
+    .leftDes {
+      left: 0;                 
+      clip-path: inset(0 100% 0 0); 
+      .leftImageContainer {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 50; 
+        clip-path: inset(0% 0% 100% 0%);
+      }
+
+      .textContainer {
+        position: absolute;
+        left: 8%; 
+        .paragraph {
+          text-align: justify;
+        }
+      }
+    }
+
+    .rightDes {
+      right: 0;                 
+      clip-path: inset(0 0 0 100%); 
+      .rightImageContainer {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 40; 
+        clip-path: inset(100% 0% 0% 0%);
+      }
+
+      .textContainer {
+        position: absolute;
+        right: 8%; 
+        .paragraph {
+          text-align: justify;
+        }
     }
   }
 
@@ -166,9 +212,10 @@
     line-height: 1.6;
     letter-spacing: 0.05em;
     text-transform: uppercase; 
-    color: #191919; 
+    color: #0c0c0c; 
     margin: 0;
     opacity: 0.85;
+    
   }
 
 

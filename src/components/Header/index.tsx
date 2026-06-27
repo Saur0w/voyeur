@@ -39,7 +39,7 @@ export default function Header() {
         <header className={styles.header} ref={headerRef}>
             <div className={styles.logoWrapper}>
                 <Link href="/" ref={logoRef} className={styles.logo}>
-                    VOYEUR
+                    Lueur
                 </Link>
             </div>
 
