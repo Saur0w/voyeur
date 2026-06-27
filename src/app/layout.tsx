@@ -14,7 +14,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Voyeur",
+  title: "Lueur",
   description: "~@sauroww(X) @saur0w(Github)",
 };
 

@@ -210,7 +210,7 @@ export default function Landing() {
                         </p>
                     </div>
                     <div className={styles.textMask}>
-                        <h2 className={styles.loaderTitle}>Truth:<br /> I&#39;m the Shadows</h2>
+                        <h2 className={styles.loaderTitle}>Within:<br /> The Hidden Glow</h2>
                     </div>
                 </div>
                 <div className={styles.firstImageContainer} ref={firstImageContainerRef}>
